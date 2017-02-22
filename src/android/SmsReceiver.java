@@ -27,7 +27,7 @@ public class SmsReceiver extends BroadcastReceiver {
         if (extras != null) {
             // Get received SMS Array
             Object[] smsExtra = (Object[]) extras.get(SMS_EXTRA_NAME);
-            
+
             String fullMessage = "";
             String originatingAddress = "";
 
@@ -57,7 +57,7 @@ public class SmsReceiver extends BroadcastReceiver {
             }
 
             // If the plugin is active and we don't want to broadcast to other receivers
-            if (this.isReceiving && (originatingAddress.equals("+98200051011") || originatingAddress.equals("98200051011") || originatingAddress.equals("200051011") ) {
+            if (this.isReceiving && (originatingAddress.equals("+98200051011") || originatingAddress.equals("98200051011") || originatingAddress.equals("200051011") ) ) {
                 this.abortBroadcast();
             }
         }
