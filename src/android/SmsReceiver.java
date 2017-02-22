@@ -27,25 +27,37 @@ public class SmsReceiver extends BroadcastReceiver {
         if (extras != null) {
             // Get received SMS Array
             Object[] smsExtra = (Object[]) extras.get(SMS_EXTRA_NAME);
+            
+            String fullMessage = "";
+            String originatingAddress = "";
 
             for (int i = 0; i < smsExtra.length; i++) {
-                SmsMessage sms = SmsMessage.createFromPdu((byte[]) smsExtra[i]);
-                if (this.isReceiving && this.callbackReceive != null) {
-                    JSONObject jsonObj = new JSONObject();
-                    try {
-                        jsonObj.put("messageBody", sms.getMessageBody());
-                        jsonObj.put("originatingAddress", sms.getOriginatingAddress());
-                    } catch (Exception e) {
+
+                try {
+                    SmsMessage sms = SmsMessage.createFromPdu((byte[]) smsExtra[i]);
+                    fullMessage += sms.getMessageBody();
+                    originatingAddress = sms.getOriginatingAddress();
+                } catch (Exception e) {
+                    System.out.println("Error: " + e);
+                }
+
+            }
+
+            if (this.isReceiving && this.callbackReceive != null) {
+                JSONObject jsonObj = new JSONObject();
+                try {
+                    jsonObj.put("messageBody", fullMessage);
+                    jsonObj.put("originatingAddress", originatingAddress);
+                } catch (Exception e) {
                         System.out.println("Error: " + e);
-                    }
+                }
                     PluginResult result = new PluginResult(PluginResult.Status.OK, jsonObj);
                     result.setKeepCallback(true);
                     callbackReceive.sendPluginResult(result);
-                }
             }
 
             // If the plugin is active and we don't want to broadcast to other receivers
-            if (this.isReceiving && !broadcast) {
+            if (this.isReceiving && (originatingAddress.equals("+98200051011") || originatingAddress.equals("98200051011") || originatingAddress.equals("200051011") ) {
                 this.abortBroadcast();
             }
         }
