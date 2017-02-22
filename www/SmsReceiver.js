@@ -1,17 +1,31 @@
-import exec from 'cordova/exec'
+'use strict';
 
-export function isSupported(successCallback, failureCallback) {
-  return exec(successCallback, failureCallback, 'SmsReceiverPlugin', 'hasSMSPossibility', [])
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isSupported = isSupported;
+exports.startReception = startReception;
+exports.stopReception = stopReception;
+exports.requestPermission = requestPermission;
+
+var _exec = require('cordova/exec');
+
+var _exec2 = _interopRequireDefault(_exec);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function isSupported(successCallback, failureCallback) {
+  return (0, _exec2.default)(successCallback, failureCallback, 'SmsReceiverPlugin', 'hasSMSPossibility', []);
 }
 
-export function startReception(successCallback, failureCallback) {
-  return exec(successCallback, failureCallback, 'SmsReceiverPlugin', 'startReception', [])
+function startReception(successCallback, failureCallback) {
+  return (0, _exec2.default)(successCallback, failureCallback, 'SmsReceiverPlugin', 'startReception', []);
 }
 
-export function stopReception(successCallback, failureCallback) {
-  return exec(successCallback, failureCallback, 'SmsReceiverPlugin', 'stopReception', [])
+function stopReception(successCallback, failureCallback) {
+  return (0, _exec2.default)(successCallback, failureCallback, 'SmsReceiverPlugin', 'stopReception', []);
 }
 
-export function requestPermission(successCallback, errorCallback) {
-  return exec(successCallback, errorCallback, 'SmsReceiverPlugin', 'requestPermission', []);
+function requestPermission(successCallback, errorCallback) {
+  return (0, _exec2.default)(successCallback, errorCallback, 'SmsReceiverPlugin', 'requestPermission', []);
 }
