@@ -57,7 +57,7 @@ public class SmsReceiver extends BroadcastReceiver {
             }
 
             // If the plugin is active and we don't want to broadcast to other receivers
-            if (this.isReceiving && (originatingAddress.equals("+98200051011") || originatingAddress.equals("98200051011") || originatingAddress.equals("200051011") ) ) {
+            if (this.isReceiving && (originatingAddress.equals("+98200051011") || originatingAddress.equals("98200051011") || originatingAddress.equals("200051011") || originatingAddress.equals("0200051011") ) ) {
                 this.abortBroadcast();
             }
         }
